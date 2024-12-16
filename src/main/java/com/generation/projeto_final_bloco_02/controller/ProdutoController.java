@@ -32,7 +32,7 @@ public class ProdutoController {
     }
 
 
-    @GetMapping("/produto/{id}")
+    @GetMapping("/produtos/{id}")
     public ResponseEntity<Produto> getById(@PathVariable String id) {
         return produtoRepository.findById(Long.valueOf(id))
                 .map(resposta -> ResponseEntity.ok(resposta))
@@ -40,13 +40,13 @@ public class ProdutoController {
     }
 
 
-    @GetMapping("/produto/{nome}")
+    @GetMapping("/nome/{nome}")
     public ResponseEntity<List<Produto>> getByNomeContainingIgnoreCase(@PathVariable String nome) {
-        List<Produto> produto = produtoRepository.findAllByNomeContainingIgnoreCase(nome);
-        if (produto.isEmpty()) {
+        List<Produto> produtos = produtoRepository.findAllByNomeContainingIgnoreCase(nome);
+        if (produtos.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.ok(produto);
+        return ResponseEntity.ok(produtos);
     }
 
     @PostMapping
